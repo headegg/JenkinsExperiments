@@ -5,6 +5,7 @@ node {
         stage 'Prepare'
         checkout scm
 
+        sh "chmod +x ./mvnw"
         sh "./mvnw org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version | grep -v '\\[' > .version"
         def version = readFile('.version').toString().trim()
 
