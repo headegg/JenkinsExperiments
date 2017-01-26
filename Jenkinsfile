@@ -13,7 +13,7 @@ node {
 
         lock('LockableThing') {
             stage 'Build'
-            sh './mvnw -T 1C clean install'
+            sh './mvnw --batch-mode -T 1C clean install'
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml'])
 
             stage 'Sonar Analysis'
