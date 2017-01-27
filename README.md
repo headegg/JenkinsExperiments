@@ -1,2 +1,2 @@
 # JenkinsExperiments
-A repository for trying out Jenkins feature.
+A repository for trying out Jenkins feature. Pipelines etc.

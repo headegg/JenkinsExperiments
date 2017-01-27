@@ -5,6 +5,7 @@ node {
         stage 'Prepare'
         checkout scm
 
+        sh "chmod +x ./mvnw"
         sh "./mvnw org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version | grep -v '\\[' > .version"
         def version = readFile('.version').toString().trim()
 
@@ -12,7 +13,7 @@ node {
 
         lock('LockableThing') {
             stage 'Build'
-            sh './mvnw -T 1C clean install -pl \\!test/functional-tests -Dskip.coverage=false'
+            sh './mvnw --batch-mode -T 1C clean install'
             step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml,**/target/failsafe-reports/TEST-*.xml'])
 
             stage 'Sonar Analysis'
