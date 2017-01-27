@@ -36,6 +36,12 @@ node {
             stage 'Deployment Health Check'
             echo "DEPLOYMENT HEALTH CHECK"
         }
+
+        echo "ENVIRONMENT VARIABLES:"
+        sh 'env > env.txt'
+        readFile('env.txt').split("\r?\n").each {
+            println it
+        }
     }
     catch(e) {
 //        hipchatSend(color: 'RED',
